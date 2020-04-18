@@ -59,7 +59,7 @@ const createWindowCreator = () => {
         },
         width: 600,
         height: 400,
-        title: "Create Appointments"
+        title: "format"
     });
 
     createWindow.setMenu(null);

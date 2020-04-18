@@ -1,0 +1,131 @@
+<html>
+
+<body>
+    <center>
+    <h1>**Selamat Datang di Rental Mobil Abadi**</h1>
+    </center>
+    <div id="today"></div>
+
+    <h2>Pelayanan kami mengutamakan kepuasan pelanggan. selalu ingat berhati-hati dan tetap waspada saat
+        berkendara.
+    </h2>
+
+    <h3>JENIS KENDARAAN :</h3>
+
+    <table width="130%">
+        <tbody>
+            <tr>
+                <td width="30%"><b>MOBIL AGYA</b></td>
+                <td width-="50%"><b>MOBIL AVANZA</b></td>
+                <td width-="50%"><b>MOBIL XENIA</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <img class="wp-image-70 aligncenter" src="https://www.jasarentalmobilbali.com/images/2018/01/sewa-mobil-agya.jpg" width="65%">
+                    <br>
+                    <strong>Manual/Matic</strong>
+                    <br>
+                    "Mobil + BBM + Sopir"
+                    <br>
+                    "Sewa Mobil Agya Manual => Rp.250.000,-"
+                    <br>
+                    "Sewa Mobil Agya Matic => Rp.300.000,-"
+                    <br>
+                </td>
+                <td>
+                    <img class="wp-image-71 aligncenter" src="https://www.jasarentalmobilbali.com/images/2018/01/sewa-mobil-avanza.jpg" width="60%">
+                    <br>
+                    <strong>Manual/Matic</strong>
+                    <br>
+                    "Mobil + BBM + Sopir"
+                    <br> 
+                    "Sewa Mobil Avanza Manual => Rp.300.000,-"
+                    <br>
+                    "Sewa Mobil Avanza Matic => Rp.350.000,-"
+                    <br>  
+                </td>
+                <td>
+                    <img class="wp-image-72 aligncenter" src="https://www.jasarentalmobilbali.com/images/2018/01/sewa-mobil-xenia-bali.jpg" width="60%">
+                    <br>
+                    <strong>Manual/Matic</strong>
+                    <br>
+                    "Mobil + BBM + Sopir"
+                    <br> 
+                    "Sewa Mobil Xenia Manual => Rp.260.000,-"
+                    <br>
+                    "Sewa Mobil Xenia Matic => Rp.290.000,-"
+                    <br>  
+                </td>
+            </tr>
+        </tbody>
+    </table>
+   <center>
+    <h4>TERIMAKASI</h4>
+   </center>
+</body>
+
+<script>
+    const electron = require("electron");
+    const {
+        ipcRenderer
+    } = electron;
+    ipcRenderer.send("appointment:request:today");
+
+    ipcRenderer.on("appointment:request:today", (event, appointments) => {
+        const listDiv = document.getElementById("list");
+        appointments.forEach(appointment => {
+            const appointmentDiv = document.createElement("div");
+            const nameParagraph = document.createElement("p");
+            nameParagraph.innerHTML = `Name: ${appointment.name}`;
+
+            const alamatParagraph = document.createElement("p");
+            alamatParagraph.innerHTML = `Alamat: ${appointment.name}`;
+
+            const numberParagraph = document.createElement("p");
+            numberParagraph.innerHTML = `Phone Number: ${appointment.number}`;
+
+            const noktpParagraph = document.createElement("p");
+            noktpParagraph.innerHTML = `No KTP/SIM: ${appointment.number}`;
+
+            const dateParagraph = document.createElement("p");
+            dateParagraph.innerHTML = `Date: ${appointment.date}`;
+
+            const hourParagraph = document.createElement("p");
+            hourParagraph.innerHTML = `Hour: ${appointment.hour}`;
+
+            const JenismobilParagraph = document.createElement("p");
+            JenismobilParagraph.innerHTML = `Jenis Mobil: ${appointment.Jenismobil}`;
+            
+            const LamapinjamParagraph = document.createElement("p");
+            LamapinjamParagraph.innerHTML = `Jenis Mobil: ${appointment.Lamapinjam}`;
+
+            const doneParagraph = document.createElement("p");
+            doneParagraph.innerHTML = `Done: ${appointment.done ? "Yes" : "No"}`;
+
+            const doneButton = document.createElement("button");
+            doneButton.innerHTML = "Done";
+            doneButton.disabled = appointment.done ? true : false;
+            doneButton.onclick = () => done(appointment.id);
+
+            const hr = document.createElement("hr");
+
+            appointmentDiv.appendChild(nameParagraph);
+            appointmentDiv.appendChild(alamatParagraph);
+            appointmentDiv.appendChild(numberParagraph);
+            appointmentDiv.appendChild(noktpParagraph);
+            appointmentDiv.appendChild(dateParagraph);
+            appointmentDiv.appendChild(hourParagraph);
+            appointmentDiv.appendChild(JenismobilParagraph);
+            appointmentDiv.appendChild(doneParagraph);
+            appointmentDiv.appendChild(doneButton);
+            appointmentDiv.appendChild(hr);
+
+            listDiv.append(appointmentDiv);
+        });
+    });
+    const done = id => {
+        ipcRenderer.send("appointment:done", id);
+    };
+</script>
+
+</html>

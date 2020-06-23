@@ -18,27 +18,27 @@
 
             const nameParagraph = document.createElement("p");
             nameParagraph.innerHTML = `Name: ${appointment.name}`;
-
-            const alamatParagraph = document.createElement("p");
-            alamatParagraph.innerHTML = `Alamat: ${appointment.alamat}`;
-
-            const numberParagraph = document.createElement("p");
-            numberParagraph.innerHTML = `Phone Number: ${appointment.number}`;
-
-            const noktpParagraph = document.createElement("p");
-            noktpParagraph.innerHTML = `No KTP/SIM: ${appointment.noktp}`;
-
+            
             const dateParagraph = document.createElement("p");
             dateParagraph.innerHTML = `Date: ${appointment.date}`;
 
             const hourParagraph = document.createElement("p");
             hourParagraph.innerHTML = `Hour: ${appointment.hour}`;
+            
+            const numberParagraph = document.createElement("p");
+            numberParagraph.innerHTML = `Phone Number: ${appointment.number}`;
 
-            const JenismobilParagraph = document.createElement("p");
-            JenismobilParagraph.innerHTML = `Jenis Mobil: ${appointment.Jenismobil}`;
+            const alamatParagraph = document.createElement("p");
+            alamatParagraph.innerHTML = `Alamat: ${appointment.alamat}`;    
 
-            const LamapinjamParagraph = document.createElement("p");
-            LamapinjamParagraph.innerHTML = `Lama Peminjaman: ${appointment.Lamapinjam}`;
+            const jumlahParagraph = document.createElement("p");
+            jumlahParagraph.innerHTML = `Jumlah Barang: ${appointment.jumlah}`;
+
+            const kodeParagraph = document.createElement("p");
+            kodeParagraph.innerHTML = `Kode Barang: ${appointment.kode}`;
+
+            const warnaParagraph = document.createElement("p");
+            warnaParagraph.innerHTML = `Warna Baju: ${appointment.warna}`;
 
             const doneParagraph = document.createElement("p");
             doneParagraph.innerHTML = `Done: ${appointment.done ? "Yes" : "No"}`;
@@ -48,11 +48,11 @@
             appointmentDiv.appendChild(nameParagraph);
             appointmentDiv.appendChild(alamatParagraph);
             appointmentDiv.appendChild(numberParagraph);
-            appointmentDiv.appendChild(noktpParagraph);
-            appointmentDiv.appendChild(dateParagraph);
             appointmentDiv.appendChild(hourParagraph);
-            appointmentDiv.appendChild(JenismobilParagraph);
-            appointmentDiv.appendChild(LamapinjamParagraph);
+            appointmentDiv.appendChild(jumlahParagraph);
+            appointmentDiv.appendChild(dateParagraph);
+            appointmentDiv.appendChild(kodeParagraph);
+            appointmentDiv.appendChild(warnaParagraph);
             appointmentDiv.appendChild(doneParagraph);
             appointmentDiv.appendChild(hr);
 

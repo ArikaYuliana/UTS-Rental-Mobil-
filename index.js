@@ -2,6 +2,7 @@ const electron = require("electron");
 const {
     v4: uuidv4 
 } = require('uuid');
+const fs = require('fs')
 
 const {
     app,
@@ -16,12 +17,19 @@ let listWindow;
 
 let allAppointment = [];
 
+fs.readFile("db.json", (err, jsonAppointments) => {
+    if(!err){
+        const oldAppointment = JSON.parse(jsonAppointments);
+        allAppointment = oldAppointment;
+    }
+});
+
 app.on("ready", () => {
     todayWindow = new BrowserWindow({
         webPreferences: {
             nodeIntegration: true
         },
-        title: "Rental Mobil Abadi"
+        title: "Baju Unik Galery"
     });
 
     todayWindow.loadURL(`file://${__dirname}/today.html`);
@@ -71,7 +79,7 @@ ipcMain.on("appointment:create", (event, appointment) => {
     appointment["id"] = uuidv4();
     appointment["done"] = 0;
     allAppointment.push(appointment);
-
+    sendTodayAppointments();
     createWindow.close();
 
     console.log(allAppointment);
@@ -89,6 +97,14 @@ ipcMain.on("appointment:done", (event, id) => {
     console.log("here3")
 });
 
+const sendTodayAppointments = () => {
+    const today = new Date().toISOString().slice(0,10);
+    const filtered = allAppointment.filter(
+        appointment => appointment.date === today
+    );
+
+    todayWindow.webContents.send("appointment:response:today", filtered);
+};
 
 const menuTemplate = [{
         label: "File",
